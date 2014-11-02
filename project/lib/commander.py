@@ -1,3 +1,5 @@
+from workers import Extractor
+
 class Commander:
     Commands = {}
 
@@ -28,8 +30,11 @@ class Commander:
                     if parsed[1] not in self.Commands[parsed[0]]:
                         print 'Action not found!'
                     else:
-                        print parsed[1]
+                        self.call(parsed[0], parsed[1])
             else:
                 print 'Command not found!'
         except Exception, ex:
             print ex
+
+    def call(self, command, action):
+        Extractor().do(command, action)
