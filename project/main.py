@@ -7,7 +7,7 @@ if __name__ == '__main__':
     commander = Commander()
 
     # Register
-    commander.register('extract <pss/pssa/topsh> <all/latest>')
+    commander.register('extract <pss/topsh> <all/latest/old>')
 
     # Start listening
     commander.listen()
