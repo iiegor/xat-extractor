@@ -3,7 +3,7 @@
 
 ## How to use
 ```sh
-$ python setup.py
+$ bin/xat
 ```
 
 ## Contributors
