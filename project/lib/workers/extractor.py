@@ -69,14 +69,18 @@ class Extractor:
                     self.Queue.append(key)
 
     def download(self):
+        queueLen = len(self.Queue)
+
         try:
             i = 0
-            while i < len(self.Queue):
-                while activeCount() < self.__Limit and i < len(self.Queue):
-                    print 'Downloading: ', self.Queue[i], '{0}/{1}'.format(i + 1, len(self.Queue))
+            while i < queueLen:
+                while activeCount() < self.__Limit and i < queueLen:
+                    print 'Downloading: ', self.Queue[i], '{0}/{1}'.format(i + 1, queueLen)
                     Thread(target = self.retrieve, args = [self.Queue[i]]).start()
                     i += 1
                 sleep(1)
+
+            print 'Please wait, finishing pending tasks...'
         except Exception, ex:
             print ex
 

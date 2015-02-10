@@ -3,7 +3,7 @@
 
 ## How to use
 ```sh
-$ bin/xat
+$ xat.sh
 ```
 
 ## Contributors
