@@ -1,4 +1,5 @@
 from workers import Extractor
+from sys import exit
 
 class Commander:
     Commands = {}
@@ -19,10 +20,9 @@ class Commander:
         self.Commands[commandName]['other'] = other
 
     def showHelp(self):
+        print 'Available commands:\n'
         for commandName in self.Commands:
-            print """
-            {0} {1} {2}
-            """.format(commandName, self.Commands[commandName]['actions'], self.Commands[commandName]['other'])
+            print """{0} {1} {2}\n""".format(commandName, self.Commands[commandName]['actions'], self.Commands[commandName]['other'])
 
     def listen(self):
         self.showHelp()
@@ -30,7 +30,9 @@ class Commander:
             nb = raw_input('> ')
             parsed = nb.split(' ')
 
-            if parsed[0] in self.Commands:
+            if parsed[0] == 'exit':
+                exit()
+            elif parsed[0] in self.Commands:
                 if len(parsed) < 3:
                     print 'You didn\'t defined the action'
                 else:
