@@ -7,7 +7,7 @@ from sys import exit
 
 class Extractor:
     Queue = []
-    __Limit = 100
+    __Limit = 50
     __Dist = 'sm2'
 
     def do(self, command, action, other):
