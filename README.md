@@ -1,5 +1,5 @@
 # xat-extractor
-> Gets all powers of xat.com
+> Get all image files of xat.com
 
 ## How to use
 ```sh
