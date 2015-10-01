@@ -16,7 +16,6 @@ class Extractor:
             exit()
 
         self.parse(action, other, self.fetch('http://xat.com/web_gear/chat/pow2.php'))
-        self.download()
 
     def fetch(self, url):
         fetched = urlopen(url)
@@ -31,7 +30,7 @@ class Extractor:
                 return []
 
     def parse(self, action, other, data):
-        if action == 'pss':
+        if action == 'pss' or action == 'images':
             if other == 'latest' or other == 'all':
                 data = data[5][1]
 
@@ -67,8 +66,14 @@ class Extractor:
 
                 for key in default_backs.split(','):
                     self.Queue.append(key)
+        
+        if action == 'images':
+            self.download('/images/smw/')
+            return
 
-    def download(self):
+        self.download()
+
+    def download(self, url="/images/sm2/"):
         queueLen = len(self.Queue)
 
         try:
@@ -76,7 +81,7 @@ class Extractor:
             while i < queueLen:
                 while activeCount() < self.__Limit and i < queueLen:
                     print 'Downloading: ', self.Queue[i], '{0}/{1}'.format(i + 1, queueLen)
-                    Thread(target = self.retrieve, args = [self.Queue[i]]).start()
+                    Thread(target = self.retrieve, args = [self.Queue[i], url]).start()
                     i += 1
                 sleep(1)
 
@@ -84,10 +89,11 @@ class Extractor:
         except Exception, ex:
             print ex
 
-    def retrieve(self, name):
+    def retrieve(self, name, url):
         while True:
             try:
-                urlretrieve("http://xat.com/images/sm2/" + name + ".swf", self.__Dist + "/" + name + ".swf")
+                ext = ".png" if url == "/images/smw/" else ".swf"
+                urlretrieve("http://xat.com" + url + name + ext, self.__Dist + "/" + name + ext)
                 break
             except Exception, e:
                 print e
