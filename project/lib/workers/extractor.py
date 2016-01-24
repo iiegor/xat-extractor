@@ -66,7 +66,13 @@ class Extractor:
 
                 for key in default_backs.split(','):
                     self.Queue.append(key)
-        
+        elif action == 'smileys':
+            default_smileys = "redface,rolleyes,hi,meh,ugh,a,sry,crs,un,d,scn,nod,gagged,nme,swt,roll,rofl,chkl,inlove,blk,xp,eyes,tired,smirk,ill,dead,hello,yum,think,mischief,zip2,puke,yawn,swear,cry2,what,omg,o_o,goo,smirk2,beye,wary,shock,xd,cyc,wt,chew,contempt,fedup,aghast,look,spin2,tipsy,twitch,shifty,ashamed,pty,sad,rolling,no,jolly,annoyed,astonished,evil,sinister,sour,um,dream,memory,babythrow,candyeat,cute,flowerthrow,gloomy,hey,hula,loving,meloneat,shadesoff,stressing,waiting,ugc,hearts2"
+            default_smileys += "peach,xana,x,chest,gst,alien,bby,bot1,tox,8ball,eye,kirb,pm,pmg,inv,inv2,inv3,sonic,shadow,mario,luigi,mushroom,yoshi,countb,ness,smashball,mephiles,tri,lucario,nights,arbiter,link,mewtwo,xj9,hk,lolwut,kermit,beaker,beast,dv,homer,3tomoe,mangekyou,pikachu,pball,wwe,sm,a1,nko,x3,dog,cat,pig,mk,penguin,panda,bear,cc,ccc,cotton,pie,c,b,o,i,t,mo,so,sb,oo,p,ph,yt,dmd,bin,ush,ipod,ip,sun,rain,r,f,li,l,u,y,n,grl,boy,scb,bio,rad,pgm,mgp,ao,star,note,hex,yy,moon,rubik,cir,cdy,deer,snta,g,sman,xday,xtre,xstk,mtoe,hly,egg,ghat,clover,stickman,stickman2,stickman3,stickairguitar,stickkungfu,stickangry,stickymca,danny,turkey,ss,qbone,mc,lb,mario8,nop,okp,mate,amy,mouser"
+
+            for key in default_smileys.split(','):
+                self.Queue.append(key)
+
         if action == 'images':
             self.download('/images/smw/')
             return
