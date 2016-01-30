@@ -8,11 +8,14 @@ from sys import exit
 class Extractor:
     Queue = []
     __Limit = 50
-    __Dist = 'sm2'
+
+    __DistSM2 = 'sm2'
+    __DistSMW = 'smw'
+    __DistKS = 'ks'
 
     def do(self, command, action, other):
-        if not path.isdir(self.__Dist) or not path.exists(self.__Dist):
-            print 'The destination folder doesn\'t exists: ' + self.__Dist
+        if not path.isdir(self.__DistSM2) or not path.exists(self.__DistSM2):
+            print 'The destination folder doesn\'t exists: ' + self.__DistSM2
             exit()
 
         self.parse(action, other, self.fetch('http://xat.com/web_gear/chat/pow2.php'))
@@ -72,12 +75,19 @@ class Extractor:
 
             for key in default_smileys.split(','):
                 self.Queue.append(key)
+        elif action == 'kisses':
+            default_kisses = "Confetti,Hearts,Champagne,Argue,Cry,Hippo,Hearts,Paint,Surprise,Magic8ball,Airplane,Parachute,Dynamite,Lips,Bomb,Fireworks,Pull,Shark,Blood,Globe,Bugs,Grumpy,Snow,Ttth"
+            default_kisses += "Marriage,Marry,Rings,Sunset,Hippod,Divorce,Divorced,Botd"
+
+            for key in default_kisses.split(','):
+                self.Queue.append(key)
 
         if action == 'images':
             self.download('/images/smw/')
-            return
-
-        self.download()
+        elif action == 'kisses':
+            self.download('/images/ks/')
+        else:
+            self.download()
 
     def download(self, url="/images/sm2/"):
         queueLen = len(self.Queue)
@@ -96,10 +106,18 @@ class Extractor:
             print ex
 
     def retrieve(self, name, url):
+        ext = ".swf"
+        dist = self.__DistSM2
+
+        if url == "/images/smw/":
+            dist = self.__DistSMW
+            ext = ".png"
+        elif url == "/images/ks/":
+            dist = self.__DistKS
+                
         while True:
             try:
-                ext = ".png" if url == "/images/smw/" else ".swf"
-                urlretrieve("http://xat.com" + url + name + ext, self.__Dist + "/" + name + ext)
+                urlretrieve("http://xat.com" + url + name + ext, dist + "/" + name + ext)
                 break
             except Exception, e:
                 print e

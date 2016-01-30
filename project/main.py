@@ -7,7 +7,7 @@ if __name__ == '__main__':
     commander = Commander()
 
     # Register
-    commander.register('extract <pss/topsh/backs/images/smileys> <all/latest/old>')
+    commander.register('extract <pss/topsh/backs/images/smileys/kisses> <all/latest/old>')
 
     # Start listening
     commander.listen()
